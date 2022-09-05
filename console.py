@@ -10,6 +10,8 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -118,13 +120,35 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        params = args.split(" ")
+        if params[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+        else:
+            new_dict = self.key_value_parser(params)
+        new_instance = HBNBCommand.classes[params[0]](**new_dict)
+        storage.new(new_instance)
         print(new_instance.id)
         storage.save()
+
+    def key_value_parser(self, args):
+        """Transform a string in dictionary"""
+        kwargs = {}
+        for idx in range (1, len(args)):
+            key = args[idx].split('=')[0]
+            value = args[idx].split('=')[1]
+            if value[0] == value[-1] == '"':
+                    value = shlex.split(value)[0].replace('_', ' ')
+            else:
+                try:
+                    value = int(value)
+                except:
+                    try:
+                        value = float(value)
+                    except:
+                        continue
+            kwargs[key] = value
+        return kwargs
 
     def help_create(self):
         """ Help information for the create method """
