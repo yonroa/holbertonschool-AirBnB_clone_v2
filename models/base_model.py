@@ -6,6 +6,7 @@ from datetime import datetime
 
 class BaseModel:
     """A base class for all hbnb models"""
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
@@ -15,19 +16,19 @@ class BaseModel:
             self.updated_at = datetime.now()
             storage.new(self)
         else:
-            if not kwargs.get('id'):
+            if kwargs.get('id') is None:
                 kwargs['id'] = str(uuid.uuid4())
-            if kwargs.get('updated_at'):
-                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
+            if kwargs.get('updated_at') is not None:
+                kwargs['updated_at'] = datetime.strptime(
+                    kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
             else:
                 kwargs['updated_at'] = datetime.now()
-            if kwargs.get('created_at'):
-                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
+            if kwargs.get('created_at') is not None:
+                kwargs['created_at'] = datetime.strptime(
+                    kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
             else:
                 kwargs['created_at'] = datetime.now()
-            if kwargs.get('__class__'):
+            if kwargs.get('__class__') is not None:
                 del kwargs['__class__']
             self.__dict__.update(kwargs)
 
