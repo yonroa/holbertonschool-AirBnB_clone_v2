@@ -138,9 +138,6 @@ class HBNBCommand(cmd.Cmd):
             value = args[idx].split('=')[1]
             if value[0] == value[-1] == '"':
                 value = shlex.split(value)[0].replace('_', ' ')
-                for idx in range(0, len(value)):
-                    if value[idx] is '"' and idx is not 0 and idx is not len(value):
-                        value.insert(idx, "\\")
             else:
                 try:
                     value = int(value)
