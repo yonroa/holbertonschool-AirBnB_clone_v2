@@ -136,8 +136,8 @@ class HBNBCommand(cmd.Cmd):
         for idx in range(1, len(args)):
             key = args[idx].split('=')[0]
             value = args[idx].split('=')[1]
-            if value[0] == value[-1] == '"':
-                value = shlex.split(value)[0].replace('_', ' ')
+            if value[0] == value[-1] in ['"', "'"]:
+                value = value.split("\"'")[0].replace('_', ' ')
             else:
                 try:
                     value = int(value)
