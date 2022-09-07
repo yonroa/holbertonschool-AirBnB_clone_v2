@@ -14,6 +14,8 @@ from os import getenv
 
 
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
+
+
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
@@ -243,7 +245,6 @@ class HBNBCommand(cmd.Cmd):
                 for k, v in storage.all().items():
                     print_list.append(str(v))
         print(print_list)
-
 
     def help_all(self):
         """ Help information for the all command """
