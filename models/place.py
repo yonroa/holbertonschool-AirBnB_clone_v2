@@ -1,13 +1,24 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 import models
 from os import getenv
 
 
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id', onupdate='CASCADE',
+                                        ondelete='CASCADE'),
+                             primary_key=True),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id', onupdate='CASCADE',
+                                        ondelete='CASCADE'),
+                             primary_key=True))
+
+
 class Place(BaseModel, Base):
     """ A place to stay """
     if HBNB_TYPE_STORAGE == "db":
