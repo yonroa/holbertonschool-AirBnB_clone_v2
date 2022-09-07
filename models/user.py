@@ -7,6 +7,8 @@ from os import getenv
 
 
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
+
+
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     if HBNB_TYPE_STORAGE == "db":

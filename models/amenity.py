@@ -6,6 +6,8 @@ from sqlalchemy import Column, String
 
 
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
+
+
 class Amenity(BaseModel, Base):
     """"""
     if HBNB_TYPE_STORAGE == "db":

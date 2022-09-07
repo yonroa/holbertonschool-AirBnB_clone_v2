@@ -10,6 +10,8 @@ import models
 
 
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
+
+
 class State(BaseModel, Base):
     """ State class """
     if HBNB_TYPE_STORAGE == 'db':
