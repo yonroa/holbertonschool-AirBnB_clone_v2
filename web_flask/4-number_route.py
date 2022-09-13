@@ -20,21 +20,21 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """Print an specified text after the letter C"""
-    return f"C {text.replace('_', ' ')}"
+    return "C {}".format(text.replace('_', ' '))
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def py_text(text='is cool'):
     """Print an specified text after the word python"""
-    return f"Python {text.replace('_', ' ')}"
+    return "Python {}".format(text.replace('_', ' '))
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def num_print(n):
     """Print if n is an int"""
     if type(n) is int:
-        return f"{n} is a number"
+        return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
