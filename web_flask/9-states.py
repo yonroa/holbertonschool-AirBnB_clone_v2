@@ -7,12 +7,18 @@ app = Flask(__name__)
 
 @app.route('/states')
 @app.route('/states/<id>', strict_slashes=False)
-def render_state_id(state_id=None):
+def render_id(id=None):
     """display a HTML page"""
-    states = storage.all("State")
-    if state_id is not None:
-        state_id = "State.{}".format(state_id)
-    return render_template('9-states.html', states=states, state_id=state_id)
+    states = storage.all('State')
+    if id:
+        key = '{}.{}'.format('State', id)
+        if key in states:
+            states = states[key]
+        else:
+            states = None
+    else:
+        states = storage.all('State').values()
+    return render_template('9-states.html', states=states, id=id)
 
 
 @app.teardown_appcontext
